@@ -1,7 +1,7 @@
 import json, xlwt
 from collections import OrderedDict
 import os
-import db_utils
+from utils_push import db_utils
 
 
 def to_order_dict(origin_dict, custom_list):

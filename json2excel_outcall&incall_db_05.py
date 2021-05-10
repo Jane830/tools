@@ -1,8 +1,7 @@
 import json
 import openpyxl
 from collections import OrderedDict
-import os
-import db_utils
+from utils_push import db_utils
 
 
 def to_order_dict(origin_dict, custom_list):
@@ -41,8 +40,8 @@ def get_time(book, json_data, sheet_name, field_list):
 
 
 
-def write_content():
-    content_list = db_utils.connect_newfs_bt()
+def write_content(timestamp):
+    content_list = db_utils.connect_newfs_bt(timestamp)
     j = 2
     for content in content_list:
         j = j + 1
@@ -50,7 +49,7 @@ def write_content():
         workbook = openpyxl.load_workbook('demo01.xlsx')
         sheet = workbook.active
         sheet = workbook.worksheets[0]       #.get_sheet_by_name('Sheet1')
-        for i in range(1,13,1):
+        for i in range(1,14,1):
             data=sheet.cell(i, 1).value
             if data in json_data:
                 data_value=json_data[data]
@@ -59,8 +58,8 @@ def write_content():
         workbook.save('demo01.xlsx')
 
 
-def write_content2():
-    content_list = db_utils.connect_newfs_bt()
+def write_content2(timestamp):
+    content_list = db_utils.connect_newfs_bt(timestamp)
     j = 2
     for content in content_list:
         j=j+1
@@ -88,6 +87,6 @@ def write_content2():
 
 
 if __name__ == '__main__':
-    write_content()
-    write_content2()
+    write_content(timestamp=1620464550)
+    write_content2(timestamp=1620464550)
 
